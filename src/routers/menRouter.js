@@ -1,14 +1,13 @@
 const express = require("express");
 const router = new express.Router();
 
-const MenRanking = require("../src/models/menSchema");
-
+ const MenRanking = require('../models/menSchema');
 
 router.get("/", (req, res) => {
-  res.send("Hello ! welcome to restful api series");
+  res.send("Hello ! welcome to restful api series from router");
 });
 
-// post request : send the data to server
+// post: /mens --> request : send the data to server
 router.post("/mens", async (req, res) => {
   try {
     // const addingMenRecord = new MenRanking({
