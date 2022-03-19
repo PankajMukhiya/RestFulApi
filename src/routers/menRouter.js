@@ -24,7 +24,7 @@ router.post("/mens", async (req, res) => {
     const insertMen = await addingMenRecord.save();
     res.status(201).send(insertMen);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(500).send(error);
     console.log("The Error is:-> ", error);
   }
 });
@@ -36,7 +36,7 @@ router.get("/mens", async (req, res) => {
     res.status(200).send(getMenRecord);
     // console.log(getMenRecord);
   } catch (error) {
-    res.status(404).send(error);
+    res.status(400).send(error);
     console.log("The Error is:-> ", error);
   }
 });
@@ -48,7 +48,7 @@ router.get("/mens/:id", async (req, res) => {
     res.status(200).send(getOneMenRecord);
     // console.log(getOneMenRecord);
   } catch (error) {
-    res.status(404).send(error);
+    res.status(400).send(error);
     console.log("The Error is:-> ", error);
   }
 });
@@ -65,10 +65,10 @@ router.patch("/mens/:id", async (req, res) => {
         new: true,
       }
     );
-    res.status(200).send(getOneMenRecord);
+    res.status(201).send(getOneMenRecord);
     console.log(getOneMenRecord);
   } catch (error) {
-    res.status(500).send(error);
+    res.status(401).send(error);
     console.log("The Error is:-> ", error);
   }
 });
@@ -77,11 +77,13 @@ router.delete("/mens/:id", async (req, res) => {
   try {
     // const bodyRequest = req.body;
     const _id = req.params.id;
-    const getOneMenRecord = await MenRanking.findByIdAndDelete(_id);
-    res.status(200).send(getOneMenRecord, "delete successfully");
-    console.log("Delete successfully ");
+    const deleteOneMenRecord = await MenRanking.findByIdAndDelete(_id);
+    res.status(200).send(`The Below Record was deleted successfully :
+    ${deleteOneMenRecord}`);
+    console.log(`The Below Record was deleted successfully :
+    ${deleteOneMenRecord}`);
   } catch (error) {
-    res.status(500).send(error);
+    res.status(503).send(error);
     console.log("The Error is:-> ", error);
   }
 });
